@@ -1,0 +1,120 @@
+<template name="searchPosts">
+
+   <!-- navbar --> 
+   <div class="navbar">
+      <div class="navbar-inner">
+
+          <!-- Search Bar -->
+             <form class="searchbar">
+                 <div class="searchbar-input">
+                     <input type="text" name="search" class="form-control" width="250px" placeholder="search...">
+                     <a href="#" class="searchbar-clear"></a>
+                 </div>
+                 <a href="#" class="searchbar-cancel">Cancel</a>
+             </form>
+             
+             <!-- Search Bar overlay-->
+             <div class="searchbar-overlay"></div>
+
+         <!-- <div class="left">
+            <a href="{{pathFor 'new'}}" class="link"> <i class="ion-chevron-left"></i> <span> </span> </a>
+            </div> --> 
+
+            <!-- 
+            <div class="right">
+               <form class="searchbar">
+                  <div class="searchbar-input">
+                     
+                     <input type="search" placeholder="Search"> 
+                     dual search
+                     {{> EasySearch.Input indexes=comboIndex}} 
+                     --> 
+                     <!-- 
+                     {{> EasySearch.Input index=postsIndex}}
+                     <a href="#" class="searchbar-clear"></a> 
+                  </div> 
+
+                  <a href="#" class="searchbar-cancel">Cancel</a> 
+               </form>
+            </div>
+            -->
+        </div>
+    </div>
+
+
+   <!-- content --> 
+   <div class="pages navbar-through toolbar-through">
+      <div class="page" data-page="index"> 
+
+         <div class="page-content">
+
+            <!-- {{#EasySearch.Each index=postsIndex}}
+               <div class="card">
+                  <a href="{{pathFor 'postPage' _id=__originalId}}"> 
+
+                     <div class="card-content">          
+                        <div class="card-content-inner">
+                                        
+                           {{title}}
+
+                           {{#if ownPost}} 
+                              <div> 
+                                 <a href="{{pathFor 'postEdit'}}"> 
+                                    <i class="ion-edit"><b> EDIT </b></i> 
+                                 </a> 
+                              </div>
+                           {{/if}}
+
+                        </div>
+                     </div>
+
+                     <div class="card-footer">
+                        <i class="icon ion-clock">
+                           {{ formatDate submitted }} 
+                        </i> 
+                        <b><a href="{{ pathFor 'users.show' _id=userId }}" class="dark"> 
+                           {{ author }} 
+                        </a></b>
+                     </div>
+
+                  </a>
+               </div>
+            {{/EasySearch.Each}} 
+
+            {{> EasySearch.LoadMore index=postsIndex}}
+            --> 
+
+            <!-- 
+            {{#EasySearch.Each index=commentsIndex}}
+               <a href="{{doc._originalId}}" class="link"> {{> postItem }} </a>
+            {{/EasySearch.Each}}
+            {{> EasySearch.LoadMore index=commentsIndex}}  
+
+            {{pathFor 'pageRoute' _id=doc.__originalId }}
+            {{doc.__originalId}} works 
+            {{pathFor 'pageRoute' doc.__originalId }}  dont work 
+            <a href="/posts{{_originalId}}"> 
+            -->
+
+
+            <!-- reactiveVar search --> 
+            {{#if searching}}
+               {{> loading}}
+
+            {{else}}
+               {{#each searchposts}}
+                  {{> postItem}}
+            
+               {{else}}
+                  <p class="alert alert-warning">
+                     Oops, nothing found for {{ query }}
+                  </p>
+               {{/each}}
+            {{/if}}
+            <!-- reactiveVar search --> 
+
+         </div>
+      </div>
+   </div>
+
+</template>
