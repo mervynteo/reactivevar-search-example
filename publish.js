@@ -6,8 +6,8 @@ Meteor.publish('posts', function() {
 Meteor.publish( 'searchposts', function( search ) {			// search = query from client 
 	check( search, Match.OneOf( String, null, undefined ) );	// check if either string, bull or undefined
 
-  	let query  = { },											//new obj passed as query to call to Posts.find()
-	  	projection = { limit: 10, sort: { title: 1 } };
+  	let query  = { },						//new obj passed as query to call to Posts.find()
+	projection = { limit: 10, sort: { title: 1 } };
 
   	if ( search ) {
     	let regex = new RegExp( search, 'i' );
@@ -15,7 +15,7 @@ Meteor.publish( 'searchposts', function( search ) {			// search = query from cli
 	   	$or: [
 	   		{ title	 : regex },
 	        	{ message : regex }
-	      ]
+	      	]
 	   };
    	projection.limit = 50;
   	}
@@ -23,7 +23,6 @@ Meteor.publish( 'searchposts', function( search ) {			// search = query from cli
 });
 
 
-//User stuff - cannot use ES6 format ..throws error
 Meteor.publish('me', function() {
 	if (!this.userId) this.ready();
 	else return [
@@ -36,9 +35,7 @@ Meteor.publish('me', function() {
 
 Meteor.publish('otherUser', function(_id) {
 	if(!_id) this.ready();
-
 	else { 
-
 		check(_id, String);
 		return [
 			Meteor.users.find(_id, { 
@@ -46,7 +43,6 @@ Meteor.publish('otherUser', function(_id) {
 			}), 
      		Posts.find({ userId: _id })
 		];
-		
 	}
 });
 
@@ -55,12 +51,3 @@ Meteor.publish('allUsers', function() {
   		fields: { profile: 1, username: 1, profileImg: 1, emails: 1, md5hash: 1 }
   	});
 });
-
-
-/*
-Meteor.publish('users.editProfile', function usersProfile() {
-  	return Meteor.users.find(this.userId, {
-		fields: { profile: 1, username: 1, profileImg: 1, emails: 1, md5hash: 1 }
-  	});
-});
-*/
