@@ -1,0 +1,36 @@
+<template name="postItem">
+
+	<div class="card">
+		<a href="{{pathFor 'postPage' id=_id}}"> 
+    
+	  		<div class="card-content">			
+	    		<div class="card-content-inner">
+					
+					{{title}}
+
+            {{#if ownPost}} 
+              <div>
+                <a href="{{ pathFor 'postEdit' id=_id }}"> 
+                  <i class="ion-edit"><b> EDIT </b></i> 
+                </a> 
+              </div>
+            {{/if}}
+
+	    		</div>
+	  		</div>
+
+	  		<div class="card-footer">
+	  			<i class="icon ion-chatbox-working">
+	  				<span> {{ shortNum commentsCount }} </span>
+	  			</i>
+	  			<i class="icon ion-clock"> 				  
+	  				<span> {{ formatDate submitted }} </span>
+	  			</i> 
+	  			<b>
+	  				<a href="{{ pathFor 'users.show' _id=userId }}"> {{ author }} </a>
+	  			</b>
+	  		</div>
+  		</a>
+  	</div>
+
+</template>
